@@ -10,7 +10,8 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
     assert: false,
     crypto: false,
     os: false,
-    process: false,
+    // process: false,
+    process: require.resolve('process/browser'),
   };
   return config;
 });
