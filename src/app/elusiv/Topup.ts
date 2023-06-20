@@ -30,11 +30,3 @@ export async function topup(
   // Send it off
   return elusivInstance.sendElusivTx(topupTx);
 }
-
-// Run main when invoking this file
-main().then(
-  () => process.exit(),
-  (err) => {
-    throw err;
-  }
-);
