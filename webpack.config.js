@@ -1,5 +1,6 @@
 const { composePlugins, withNx } = require('@nx/webpack');
 const { withReact } = require('@nx/react');
+const webpack = require('webpack');
 
 // Nx plugins for webpack.
 module.exports = composePlugins(withNx(), withReact(), (config) => {
@@ -10,8 +11,12 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
     assert: false,
     crypto: false,
     os: false,
-    // process: false,
-    process: require.resolve('process/browser'),
   };
+  config.plugins.push(
+    new webpack.ProvidePlugin({
+      buffer: ['buffer', 'Buffer'],
+      process: 'process/browser',
+    })
+  );
   return config;
 });
