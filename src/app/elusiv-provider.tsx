@@ -10,10 +10,10 @@ import {
 import { getParams } from './elusiv/boilerplate';
 
 export interface ElusivProviderContext {
-  elusiv: Elusiv | undefined;
-  loading: boolean;
-  keypair: Keypair;
   connection: Connection;
+  elusiv: Elusiv;
+  initializing: boolean;
+  keypair: Keypair;
 }
 
 const ElusivContext = createContext<ElusivProviderContext>(
@@ -40,10 +40,10 @@ export function ElusivProvider({
   }, [connection, keypair]);
 
   const value: ElusivProviderContext = {
-    elusiv,
-    loading,
-    keypair,
     connection,
+    elusiv: elusiv as Elusiv,
+    initializing: loading,
+    keypair,
   };
   return (
     <ElusivContext.Provider value={value}>{children}</ElusivContext.Provider>
